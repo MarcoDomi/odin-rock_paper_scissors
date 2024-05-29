@@ -1,4 +1,6 @@
 
+//let humanScore = 0;
+//let computerScore = 0;
 
 function getComputerChoice() {
     const choices = ['rock', 'paper', 'scissors'];
@@ -8,7 +10,7 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    const choice = prompt('Pick a choice: ');
+    const choice = prompt('Enter rock, paper or scissors: ');
 
     switch (choice.toLowerCase()) {
         case 'rock':
@@ -25,18 +27,18 @@ function playRound(humanChoice, computerChoice) {
     
     if(humanChoice === computerChoice) {
             console.log('Draw!')
-        }
-        else if((humanChoice === 'scissors' && computerChoice === 'paper') ||
+    }
+    else if((humanChoice === 'scissors' && computerChoice === 'paper') ||
             (humanChoice === 'paper' && computerChoice === 'rock') ||
             (humanChoice === 'rock' && computerChoice === 'scissors')){
             
             humanScore++;
             console.log(`You win! ${humanChoice} beats ${computerChoice}`); 
-        }
-        else {
-            computerScore++;
-            console.log(`You lose! ${computerChoice} beats ${humanChoice}`)
-        }
+    }
+    else {
+        computerScore++;
+        console.log(`You lose! ${computerChoice} beats ${humanChoice}`)
+    }
 }
 */
 
@@ -66,6 +68,8 @@ function playGame() {
     for (let i = 0; i < NUMBER_OF_ROUNDS; i++){
         const humanSelection = getHumanChoice();
         const computerSelection = getComputerChoice();
+        console.log(humanSelection);
+        console.log(computerSelection);
         playRound(humanSelection, computerSelection);
     }
 
