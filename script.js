@@ -4,7 +4,8 @@ let computerScore = 0;
 
 let humanScoreSpan = document.querySelector('#humanScore');
 let computerScoreSpan = document.querySelector('#computerScore');
-let resultMsg = document.querySelector('#gameResult');
+let gameInfo = document.querySelector('#gameInfo');
+let gameResult = document.querySelector('#gameResult');
 
 function getComputerChoice() {
     const choices = ['rock', 'paper', 'scissors'];
@@ -13,44 +14,45 @@ function getComputerChoice() {
     return choices[computerChoice];
 }
 
-function updatePageScore(span, newScore) {
-    let spanMessage = span.innerText;
-    span.innerText = spanMessage.slice(0, -1) + newScore;
-}
 
 function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
-        resultMsg.innerText = 'Draw!'
+        gameInfo.innerText = 'Draw!'
     }
     else if ((humanChoice === 'scissors' && computerChoice === 'paper') ||
              (humanChoice === 'paper' && computerChoice === 'rock') ||
              (humanChoice === 'rock' && computerChoice === 'scissors')) {
         
         humanScore++;
-        updatePageScore(humanScoreSpan, humanScore);
-        resultMsg.innerText = `You win! ${humanChoice} beats ${computerChoice}`;
+        humanScoreSpan.innerText = humanScore;
+        gameInfo.innerText = `You win! ${humanChoice} beats ${computerChoice}`;
     }
     else {
         computerScore++;
-        updatePageScore(computerScoreSpan, computerScore);
-        resultMsg.innerText = `You lose! ${computerChoice} beats ${humanChoice}`;
+        computerScoreSpan.innerText = computerScore;
+        gameInfo.innerText = `You lose! ${computerChoice} beats ${humanChoice}`;
     } 
 }
 
+function resetGame() {
+    humanScore = 0;
+    computerScore = 0;
+    humanScoreSpan.innerText = '0';
+    computerScoreSpan.innerText = '0';
+    gameInfo.innerText = 'Info will be displayed here.';
+    //gameResult.innerText = '';
+}
+
 function checkWinner() {
-
-    if (humanScore === 5) {
-        resultMsg.innerText = 'Player wins the game!';
-    }
-    else if (computerScore === 5) {
-        resultMsg.innerText = 'Computer wins the game!';
-    }
-
     if (humanScore === 5 || computerScore === 5) {
-        humanScore = 0;
-        computerScore = 0;
-        updatePageScore(humanScoreSpan, humanScore);
-        updatePageScore(computerScoreSpan, computerScore);
+        if (humanScore === 5) {
+            gameResult.innerText = 'Player wins the game!';
+        }
+        else if (computerScore === 5) {
+            gameResult.innerText = 'Computer wins the game!';
+        }
+        //add reset button here
+        resetGame();
     }
 }
 
