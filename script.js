@@ -43,7 +43,7 @@ function resetGame() {
     computerScore = 0;
     humanScoreSpan.innerText = '0';
     computerScoreSpan.innerText = '0';
-    //gameInfo.innerText = 'Info will be displayed here.';
+    gameInfo.innerText = 'Info will be displayed here.';
     
 }
 
@@ -57,7 +57,20 @@ function checkWinner() {
         }
         //add reset button here
         resetBtn.style.visibility = 'visible';
+        disableButtons();
     }
+}
+
+function disableButtons() {
+    btns.forEach((btn) => {
+        btn.disabled = true;
+    });
+}
+
+function enableButtons() {
+    btns.forEach((btn) => {
+        btn.disabled = false;
+    });
 }
 
 function playGame() {
@@ -71,9 +84,10 @@ function playGame() {
         });
     });
 
+    resetBtn.style.visibility = 'hidden';
     resetBtn.addEventListener('click', () => {
         resetGame();
-        gameInfo.innerText = 'Info will be displayed here.';
+        enableButtons();
         resetBtn.style.visibility = 'hidden';
     });
 }
