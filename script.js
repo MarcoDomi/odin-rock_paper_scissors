@@ -5,7 +5,11 @@ let computerScore = 0;
 let humanScoreSpan = document.querySelector('#humanScore');
 let computerScoreSpan = document.querySelector('#computerScore');
 let gameInfo = document.querySelector('#gameInfo');
-let gameResult = document.querySelector('#gameResult');
+let btns = document.querySelectorAll('.choice');
+let resetBtn = document.querySelector('#resetGame');
+
+
+
 
 function getComputerChoice() {
     const choices = ['rock', 'paper', 'scissors'];
@@ -39,37 +43,40 @@ function resetGame() {
     computerScore = 0;
     humanScoreSpan.innerText = '0';
     computerScoreSpan.innerText = '0';
-    gameInfo.innerText = 'Info will be displayed here.';
-    //gameResult.innerText = '';
+    //gameInfo.innerText = 'Info will be displayed here.';
+    
 }
 
 function checkWinner() {
     if (humanScore === 5 || computerScore === 5) {
         if (humanScore === 5) {
-            gameResult.innerText = 'Player wins the game!';
+            gameInfo.innerText = 'Player wins the game!';
         }
         else if (computerScore === 5) {
-            gameResult.innerText = 'Computer wins the game!';
+            gameInfo.innerText = 'Computer wins the game!';
         }
         //add reset button here
-        resetGame();
+        resetBtn.style.visibility = 'visible';
     }
 }
 
 function playGame() {
-    btns = document.querySelectorAll('button');
-
+    
     btns.forEach((btn) => {
         btn.addEventListener('click', (e) => {
             let humanChoice = btn.innerText.toLocaleLowerCase();
             let computerChoice = getComputerChoice();
             playRound(humanChoice, computerChoice);
             checkWinner();
-
         });
+    });
+
+    resetBtn.addEventListener('click', () => {
+        resetGame();
+        gameInfo.innerText = 'Info will be displayed here.';
+        resetBtn.style.visibility = 'hidden';
     });
 }
 
+
 playGame();
-
-
